@@ -1,4 +1,3 @@
-// ES2016サポートのWebpack
 import Web3 from 'web3'
 import { NonceTxMiddleware, SignedTxMiddleware, Client, ClientEvent, Contract, Address, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js'
 import LoomTruffleProvider from 'loom-truffle-provider'
@@ -21,33 +20,21 @@ const web3 = new Web3(new LoomProvider(client, privateKey))
 
 const ABI = [{"anonymous":false,"inputs":[{"indexed":false,"name":"_value","type":"uint256"}],"name":"NewValueSet","type":"event"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]
 
-const contractAddress = '0xf8ea34a6c6d45007b3b82608b1ee8c5106ff1085'
+const contractAddress = '0xf8ea34a6c6d45007b3b82608b1ee8c5106ff1085' // ここにデプロイ時に発行されるコントラクトアドレスを入れます
 
 // Instantiate the contract and let it ready to be used
 const contract = new web3.eth.Contract(ABI, contractAddress, {from})
 
 async function setValue(number) {
-	// バリューを47に設定
 	const tx = await contract.methods.set(number).send()
-
-	// バリュー47を取得
 	const value = await contract.methods.get().call()
 
 	return value
 }
 
-setValue(47).then((value) => {
+setValue(99999).then((value) => {
 	console.log(value)
 })
-/*
-(async function () {
-	// バリューを47に設定
-	const tx = await contract.methods.set(47).send()
-
-	// バリュー47を取得
-	const value = await contract.methods.get().call()
-})()
-*/
 
 contract.events.NewValueSet({}, (err, event) => {
   if (err) {
