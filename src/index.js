@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { NonceTxMiddleware, SignedTxMiddleware, Client, ClientEvent, Contract, Address, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js'
+import { Client, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js'
 import LoomTruffleProvider from 'loom-truffle-provider'
 
 const privateKey = CryptoUtils.generatePrivateKey()
